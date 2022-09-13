@@ -5,26 +5,9 @@ import Tasks from "./component/Tasks";
 import AddTask from "./component/AddTask";
 
 function App() {
-  const [tasks, setTasks] = useState([
-    {
-      id: 1,
-      text: "Doctor's Appointment",
-      reminder: true,
-      date: "Feb 15th 2020",
-    },
-    {
-      id: 2,
-      text: "Teacher's Meeting",
-      reminder: true,
-      date: "Feb 15th 2020",
-    },
-    {
-      id: 3,
-      text: "Football Practice",
-      reminder: false,
-      date: "Feb 15th 2020",
-    },
-  ]);
+  const [tasks, setTasks] = useState([]);
+
+  const [showAddTask, setShowAddTask] = useState(false);
 
   const onDelete = (tas) => {
     const newTasks = tasks.filter((task) => task.id !== tas.id);
@@ -45,14 +28,24 @@ function App() {
   };
 
   const addTask = (task) => {
-    const newTasks = [...tasks, task];
-    setTasks(newTasks);
+    if (tasks) {
+      const newTasks = [...tasks, task];
+      setTasks(newTasks);
+    } else {
+      const newTasks = [task];
+      setTasks(newTasks);
+    }
+  };
+
+  const onShow = () => {
+    const show = !showAddTask;
+    setShowAddTask(show);
   };
 
   return (
     <div className="container">
-      <Header />
-      <AddTask onAdd={addTask} tasks={tasks} />
+      <Header onShow={onShow} showAdd={showAddTask} />
+      {showAddTask && <AddTask onAdd={addTask} tasks={tasks} />}
       {tasks.length > 0 ? (
         <Tasks tasks={tasks} onDelete={onDelete} onToggle={onToggle} />
       ) : (

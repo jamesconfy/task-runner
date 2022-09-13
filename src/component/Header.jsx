@@ -1,10 +1,14 @@
 import Button from "./Button";
 
-function Header({ title }) {
+function Header({ title, onShow, showAdd }) {
   return (
     <header className="header">
       <h1>{title}</h1>
-      <Button />
+      <Button
+        title={showAdd ? "Close" : "Add"}
+        color={showAdd ? "red" : "green"}
+        onClicked={onShow}
+      />
     </header>
   );
 }
