@@ -19,17 +19,7 @@ function AddTask({ onAdd, tasks }) {
       return;
     }
 
-    // if (tasks.length >= 2) {
-    //   const highestID = tasks.reduce((a, b) => {
-    //     return Math.max((a.id, b.id), -Infinity);
-    //   });
-    //   onAdd({ id: highestID + 1, text: task, date: date, reminder: check });
-    // } else if (tasks.length === 1) {
-    //   const highestID = tasks[0].id;
-    //   onAdd({ id: highestID + 1, text: task, date: date, reminder: check });
-    // } else {
     onAdd({ text: task, date: date, reminder: check });
-    // }
   };
 
   return (

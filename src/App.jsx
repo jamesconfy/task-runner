@@ -4,6 +4,7 @@ import Header from "./component/Header";
 import Footer from "./component/Footer";
 import "./App.css";
 import Tasks from "./component/Tasks";
+import About from "./component/About";
 import AddTask from "./component/AddTask";
 
 function App() {
@@ -73,12 +74,26 @@ function App() {
     <Router>
       <div className="container">
         <Header onShow={onShow} showAdd={showAddTask} />
-        {showAddTask && <AddTask onAdd={addTask} tasks={tasks} />}
-        {tasks.length > 0 ? (
-          <Tasks tasks={tasks} onDelete={onDelete} onToggle={onToggle} />
-        ) : (
-          <h3 className="empty">Empty</h3>
-        )}
+        <Routes>
+          <Route
+            path="/"
+            element={
+              <>
+                {showAddTask && <AddTask onAdd={addTask} tasks={tasks} />}
+                {tasks.length > 0 ? (
+                  <Tasks
+                    tasks={tasks}
+                    onDelete={onDelete}
+                    onToggle={onToggle}
+                  />
+                ) : (
+                  <h3 className="empty">Empty</h3>
+                )}
+              </>
+            }
+          />
+          <Route path="about" element={<About />} />
+        </Routes>
         <Footer />
       </div>
     </Router>
